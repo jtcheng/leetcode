@@ -16,23 +16,21 @@
 class Solution {
 public:
 	vector<int> findMode(TreeNode* root) {
-		vector<int> modes;
 		if (!root) {
 			return modes;
 		}
-		int curNum = root->val;
+		int curNum = INT_MIN;
 		int curCnt = 0;
-		int maxCnt = 1;
-		inOrder(root, curNum, curCnt, maxCnt, modes);
+		inOrder(root, curNum, curCnt);
 		return modes;
 	}
 
 private:
-	void inOrder(TreeNode* root, int& curNum, int& curCnt, int& maxCnt, vector<int>& modes) {
+	void inOrder(TreeNode* root, int& curNum, int& curCnt) {
 		if (!root) {
 			return;
 		}
-		inOrder(root->left, curNum, curCnt, maxCnt, modes);
+		inOrder(root->left, curNum, curCnt);
 
 		if (root->val == curNum) {
 			curCnt++;
@@ -50,6 +48,10 @@ private:
 			modes.push_back(curNum);
 		}
 
-		inOrder(root->right, curNum, curCnt, maxCnt, modes);
+		inOrder(root->right, curNum, curCnt);
 	}
+
+private:
+	vector<int> modes{};
+	int maxCnt = 1;
 };

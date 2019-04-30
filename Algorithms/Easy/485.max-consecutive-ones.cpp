@@ -11,8 +11,9 @@ public:
 		int now = 0;
 		for (int i = 0, len = nums.size(); i < len; ++i) {
 			if (nums[i] == 1) {
-				++now;
-				ans = max(ans, now);
+				if (++now > ans) {
+					ans = now;
+				}
 			}
 			else {
 				now = 0;
